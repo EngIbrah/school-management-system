@@ -86,19 +86,3 @@ npm run lint
 - Fork → feature branch → Pull Request.
 - Keep UI changes focused and update component docs when adding new pieces.
 
-## Accessibility & UX
-
-- Prefer semantic HTML and ARIA attributes for interactive components.
-- Verify color contrast and keyboard navigation.
-
-## Credits
-
-- Built with Next.js, React, and Tailwind CSS.
-
-## License
-
-Add your preferred license (e.g., MIT) and include a `LICENSE` file in the repository root.
-
----
-
-If you'd like, I can also commit this change and open a branch for you.
