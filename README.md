@@ -1,6 +1,7 @@
 # School Management System — UI Dashboard (Frontend)
 
-![Dashboard screenshot](/schoolmate.png)
+![Dashboard screenshot](./public/schoolmate.png)
+
 
 A modern, role-based dashboard UI for a School Management System (SMS) built with Next.js and Tailwind CSS. This frontend contains reusable components and pages for admins, teachers, students, and parents.
 
