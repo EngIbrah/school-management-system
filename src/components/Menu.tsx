@@ -1,141 +1,112 @@
-import Image from "next/image";
-import Link from "next/link";
+// components/Menu.tsx
+"use client";
 
-const menuItems = [
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  Home,
+  Users,
+  User,
+  UserRound,
+  GraduationCap,
+  BookOpen,
+  School,
+  BookMarked,
+  FileText,
+  ClipboardList,
+  BarChart3,
+  CalendarCheck2,
+  Calendar,
+  MessageSquare,
+  Megaphone,
+  Settings,
+  LogOut,
+} from "lucide-react";
+import { LucideIcon } from "lucide-react";
+
+// Assume you have a way to get current user role (e.g., from context or auth)
+// For demo, replace with your actual role logic
+const role = "admin"; // "teacher" | "student" | "parent"
+
+interface MenuItem {
+  label: string;
+  href: string;
+  icon: LucideIcon;
+  visible: string[];
+}
+
+const menuItems: { title: string; items: MenuItem[] }[] = [
   {
     title: "MENU",
     items: [
-      {
-        icon: "/home.png",
-        label: "Home",
-        href: "/",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
-      {
-        icon: "/teacher.png",
-        label: "Teachers",
-        href: "/list/teachers",
-        visible: ["admin", "teacher"],
-      },
-      {
-        icon: "/student.png",
-        label: "Students",
-        href: "/list/students",
-        visible: ["admin", "teacher"],
-      },
-      {
-        icon: "/parent.png",
-        label: "Parents",
-        href: "/list/parents",
-        visible: ["admin", "teacher"],
-      },
-      {
-        icon: "/subject.png",
-        label: "Subjects",
-        href: "/list/subjects",
-        visible: ["admin"],
-      },
-      {
-        icon: "/class.png",
-        label: "Classes",
-        href: "/list/classes",
-        visible: ["admin", "teacher"],
-      },
-      {
-        icon: "/lesson.png",
-        label: "Lessons",
-        href: "/list/lessons",
-        visible: ["admin", "teacher"],
-      },
-      {
-        icon: "/exam.png",
-        label: "Exams",
-        href: "/list/exams",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
-      {
-        icon: "/assignment.png",
-        label: "Assignments",
-        href: "/list/assignments",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
-      {
-        icon: "/result.png",
-        label: "Results",
-        href: "/list/results",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
-      {
-        icon: "/attendance.png",
-        label: "Attendance",
-        href: "/list/attendance",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
-      {
-        icon: "/calendar.png",
-        label: "Events",
-        href: "/list/events",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
-      {
-        icon: "/message.png",
-        label: "Messages",
-        href: "/list/messages",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
-      {
-        icon: "/announcement.png",
-        label: "Announcements",
-        href: "/list/announcements",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
+      { label: "Home", href: "/admin", icon: Home, visible: ["admin", "teacher", "student", "parent"] },
+      { label: "Teachers", href: "/list/teachers", icon: User, visible: ["admin", "teacher"] },
+      { label: "Students", href: "/list/students", icon: GraduationCap, visible: ["admin", "teacher"] },
+      { label: "Parents", href: "/list/parents", icon: UserRound, visible: ["admin", "teacher"] },
+      { label: "Subjects", href: "/list/subjects", icon: BookOpen, visible: ["admin"] },
+      { label: "Classes", href: "/list/classes", icon: School, visible: ["admin", "teacher"] },
+      { label: "Lessons", href: "/list/lessons", icon: BookMarked, visible: ["admin", "teacher"] },
+      { label: "Exams", href: "/list/exams", icon: FileText, visible: ["admin", "teacher", "student", "parent"] },
+      { label: "Assignments", href: "/list/assignments", icon: ClipboardList, visible: ["admin", "teacher", "student", "parent"] },
+      { label: "Results", href: "/list/results", icon: BarChart3, visible: ["admin", "teacher", "student", "parent"] },
+      { label: "Attendance", href: "/list/attendance", icon: CalendarCheck2, visible: ["admin", "teacher", "student", "parent"] },
+      { label: "Events", href: "/list/events", icon: Calendar, visible: ["admin", "teacher", "student", "parent"] },
+      { label: "Messages", href: "/list/messages", icon: MessageSquare, visible: ["admin", "teacher", "student", "parent"] },
+      { label: "Announcements", href: "/list/announcements", icon: Megaphone, visible: ["admin", "teacher", "student", "parent"] },
     ],
   },
   {
     title: "OTHER",
     items: [
-      {
-        icon: "/profile.png",
-        label: "Profile",
-        href: "/profile",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
-      {
-        icon: "/setting.png",
-        label: "Settings",
-        href: "/settings",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
-      {
-        icon: "/logout.png",
-        label: "Logout",
-        href: "/logout",
-        visible: ["admin", "teacher", "student", "parent"],
-      },
+      { label: "Profile", href: "/profile", icon: Users, visible: ["admin", "teacher", "student", "parent"] },
+      { label: "Settings", href: "/settings", icon: Settings, visible: ["admin", "teacher", "student", "parent"] },
+      { label: "Logout", href: "/logout", icon: LogOut, visible: ["admin", "teacher", "student", "parent"] },
     ],
   },
 ];
 
 const Menu = () => {
+  const pathname = usePathname();
+
   return (
-    <div>
+    <div className="mt-4 text-sm">
       {menuItems.map((section) => (
-        <div className="mt-4 text-sm" key={section.title}>
-          <span className="hidden lg:block text-gray-400 font-light my-4">{section.title}</span>
-          <div>
-            {section.items.map((item) => (
-              <Link 
-                  href={item.href} key={item.label}
-                  className="flex items-center justify-center lg:justify-start  gap-4 text-gray-500 py-2"
+        <div className="mb-6" key={section.title}>
+          <span className="hidden lg:block text-slate-500 font-semibold text-xs uppercase tracking-wider px-6 mb-2">
+            {section.title}
+          </span>
+          <nav className="space-y-1">
+            {section.items
+              .filter((item) => item.visible.includes(role))
+              .map((item) => {
+                const Icon = item.icon;
+                const isActive = pathname === item.href;
+
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={`flex items-center gap-4 px-6 py-3 rounded-lg transition-all duration-200 group
+                      ${isActive
+                        ? "bg-blue-600 text-white shadow-md"
+                        : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                      }`}
                   >
-                <Image src={item.icon} alt={item.label} width={20} height={20} />
-                <span className="hidden lg:block">{item.label}</span>
-              </Link>
-            ))}
-          </div>
+                    <Icon
+                      className={`w-5 h-5 transition-colors
+                        ${isActive ? "text-white" : "group-hover:text-white"}
+                      `}
+                      strokeWidth={2}
+                    />
+                    <span className="hidden lg:block font-medium">{item.label}</span>
+                  </Link>
+                );
+              })}
+          </nav>
         </div>
       ))}
     </div>
   );
 };
+
 export default Menu;

@@ -1,3 +1,94 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Modern & Clean React Calendar Styling - Only affects EventCalendar */
+.react-calendar {
+  width: 100% !important;
+  border: none !important;
+  font-family: system-ui, sans-serif !important;
+  background: transparent !important;
+}
+
+.react-calendar__navigation button {
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  transition: background 0.2s;
+}
+
+.react-calendar__navigation button:hover {
+  background: #f1f5f9;
+}
+
+.react-calendar__tile {
+  border-radius: 0.75rem !important;
+  padding: 0.75em;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.react-calendar__tile:hover {
+  background: #e0f2fe !important;
+}
+
+.react-calendar__tile--now {
+  background: #2563eb !important; /* Matches our primary blue */
+  color: white !important;
+  font-weight: bold;
+}
+
+.react-calendar__tile--active {
+  background: #2563eb !important;
+  color: white !important;
+}
+
+/* Modern React Calendar */
+.modern-calendar {
+  border: none;
+  font-family: inherit;
+}
+
+.react-calendar__navigation button {
+  font-weight: 600;
+  color: #334155;
+}
+
+.react-calendar__tile {
+  border-radius: 0.75rem;
+}
+
+.react-calendar__tile--now {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.react-calendar__tile--active {
+  background: #2563eb !important;
+  color: white !important;
+}
+/* Calendar Navigation */
+.react-calendar__navigation {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.react-calendar__navigation button {
+  min-width: 36px;
+  background: transparent;
+  font-size: 1rem;
+}
+
+.react-calendar__navigation button:disabled {
+  opacity: 0.3;
+}
+
+/* Hide double arrows (year jump) */
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  display: none;
+}
+
+
+/* You can safely delete all the .rbc-* rules since you're not using react-big-calendar anymore */
+/* They do nothing now and just add unnecessary CSS weight */
